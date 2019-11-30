@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.protocol.dbaccess.DatabaseDao">
+
+    <select id="getRealTimeData" parameterType="com.protocol.entity.Device"
+            resultType="com.protocol.entity.Device">
+
+        select business_site.name,business_site_info_update.* FROM business_site_info_update
+        LEFT JOIN business_site on business_site.code = business_site_info_update.site_code
+        <where>
+            <if test="name != null">business_site.name = #{name}</if>
+            <if test="site_code != null">and business_site_info_update.site_code = #{site_code}</if>
+            <if test="water_sensor_status != null">and business_site_info_update.water_sensor_status = #{water_sensor_status}
+            </if>
+            <if test="siren_status != null">and business_site_info_update.siren_status = #{siren_status}</if>
+            <if test="netStatus ==1">and TIMESTAMPDIFF(MINUTE , business_site_info_update.created,SYSDATE()) &lt; 120
+            </if>   <!-- 在线 -->
+            <if test="netStatus ==2">and TIMESTAMPDIFF(MINUTE , business_site_info_update.created,SYSDATE()) &gt;= 120
+            </if>      <!-- 离线 -->
+        </where>
+        order by business_site_info_update.created desc
+    </select>
+
+
+    <select id="getHistory" parameterType="com.protocol.entity.Device"
+            resultType="com.protocol.entity.Device">
+
+        select business_site.name,business_site_info.* FROM business_site_info
+        LEFT JOIN business_site on business_site.code = business_site_info.site_code
+        <where>
+            <if test="name != null">business_site.name = #{name}</if>
+            <if test="site_code != null">business_site_info.site_code = #{site_code}</if>
+            <if test="water_sensor_status != null">business_site_info.water_sensor_status = #{water_sensor_status}
+            </if>
+            <if test="siren_status != null">business_site_info.siren_status = #{siren_status}</if>
+
+        </where>
+    </select>
+
+
+    <select id="getDevSite" parameterType="com.protocol.entity.DevSite"
+            resultType="com.protocol.entity.DevSite">
+            select * from business_site where is_del = 1 and code = #{code}
+    </select>
+
+
+    <select id="getAlarmTel" parameterType="com.protocol.entity.AlarmTel"
+            resultType="com.protocol.entity.AlarmTel">
+
+
+            select A.id as site_id, A.alarmcall_id ,A.code,
+            business_alarmcalluser.alarmcalluser_name,
+            business_alarmcalluser.alarmcalluser_phone,
+            business_alarmcalluser.dept_name
+
+            from business_alarmcalluser LEFT JOIN
+
+            (select business_site.id,business_site.code,business_alarmcall_site.alarmcall_id from
+            business_alarmcall_site  LEFT JOIN business_site on business_site.id = business_alarmcall_site.site_id
+            ) as A  ON A.alarmcall_id = business_alarmcalluser.id
+
+            where  business_alarmcalluser.is_del=1 AND  A.code = #{code}
+
+
+    </select>
+
+
+    <insert id="insertWaringRecord" parameterType="com.protocol.entity.AlarmTel">
+			insert into business_message_record (site_id,alarmcall_id,content,alarmcalluser_phone,status,created)
+			values(#{site_id},#{alarmcall_id},#{content},#{alarmcalluser_phone},#{status},#{created})
+	</insert>
+
+
+
+    <update id="updateRealTimeData" parameterType="com.protocol.entity.Device">
+
+    update  business_site_info_update set
+      water_value = #{water_value},
+      water_sensor_status = #{water_sensor_status},
+      siren_status = #{siren_status},
+      siren1_sensor_status = #{siren1_sensor_status},
+      siren2_sensor_status = #{siren2_sensor_status},
+      siren3_sensor_status = #{siren3_sensor_status},
+      siren4_sensor_status = #{siren4_sensor_status},
+      created = #{created}
+      where site_code=#{site_code}
+    </update>
+
+    <insert id="insertRealTimeData" parameterType="com.protocol.entity.Device">
+			insert into business_site_info_update (site_code,water_value,water_sensor_status,siren_status,siren1_sensor_status,siren2_sensor_status,siren3_sensor_status,siren4_sensor_status,created)
+			values(#{site_code},#{water_value},#{water_sensor_status},#{siren_status},#{siren1_sensor_status},#{siren2_sensor_status},#{siren3_sensor_status},#{siren4_sensor_status},#{created})
+	</insert>
+
+
+    <insert id="insertHistory" parameterType="com.protocol.entity.Device">
+			insert into business_site_info (site_id,site_code,water_value,water_sensor_status,siren_status,siren1_sensor_status,siren2_sensor_status,siren3_sensor_status,siren4_sensor_status,created)
+			values(#{site_id},#{site_code},#{water_value},#{water_sensor_status},#{siren_status},#{siren1_sensor_status},#{siren2_sensor_status},#{siren3_sensor_status},#{siren4_sensor_status},#{created})
+	</insert>
+
+
+    <insert id="insertDevSite" parameterType="com.protocol.entity.DevSite">
+			insert into business_site (code,name,corrected_parameter,prewarning_max_value,is_del)
+			values(#{code},#{code},0,20,1)
+	</insert>
+
+
+</mapper>

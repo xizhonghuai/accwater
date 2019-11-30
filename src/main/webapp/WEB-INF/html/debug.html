@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_jqgrid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+    <title>H+ 后台主题UI框架 - jqGird</title>
+    <meta content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台" name="keywords">
+    <meta content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术"
+          name="description">
+
+    <link href="favicon.ico" rel="shortcut icon">
+    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+
+    <style>
+        /* Additional style to fix warning dialog position */
+        #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+    </style>
+
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+
+                <div class="ibox-content">
+
+
+                    <div class="row">
+
+
+                        <div class="col-lg-2">
+                            <input class="form-control" id="deviceId"
+                                   placeholder="输入设备Id" type="text">
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <input class="form-control" id="cmdType" placeholder="选择指令"
+                                       type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-white dropdown-toggle" data-toggle="dropdown"
+                                            type="button">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <input class="form-control" id="cmdPar"
+                                   placeholder="输入命令参数" type="text">
+                        </div>
+
+
+                        <div class="col-lg-1">
+                            <div class="input-group">
+                                <button class="btn btn-primary " onclick="sendMsg()"
+                                        type="button">
+                                    <i class="fa fa-search"></i> <span class="bold">发送</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-1">
+                            <a id="pro" class="btn btn-success btn-outline" onclick="showP()">
+                                <i class="fa fa-eye"> </i> 协议说明
+                            </a>
+                        </div>
+
+                        <div class="col-lg-1">
+                            <a onclick="clearsend()" class="btn btn-success btn-outline">
+                                <i class="fa fa-undo"> </i> 清空发送
+                            </a>
+                        </div>
+
+                        <div class="col-lg-1">
+                            <a onclick="clearrec()" class="btn btn-success btn-outline">
+                                <i class="fa fa-undo"> </i> 清空接收
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a aria-expanded="true" data-parent="#accordion"
+                                           data-toggle="collapse" href="tabs_panels.html#collapseOne">发送区</a>
+                                    </h5>
+                                </div>
+                                <div aria-expanded="true" class="panel-collapse collapse in" id="collapseOne" style="">
+                                    <div class="panel-body">
+
+
+                                        <div style="float:left;width:100%;">
+                                            <textarea readonly id="sendMsg" style="width:100%;height: 300px"></textarea>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a aria-expanded="true" data-parent="#accordion"
+                                           data-toggle="collapse" href="tabs_panels.html#collapseOne1">接收区</a>
+                                    </h5>
+                                </div>
+                                <div aria-expanded="true" class="panel-collapse collapse in" id="collapseOne1" style="">
+                                    <div class="panel-body">
+
+
+                                        <div style="float:left;width:100%;">
+                                            <textarea readonly id="recMsg" style="width:100%;height: 300px"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <br>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <a aria-expanded="true" data-parent="#accordion"
+                                   data-toggle="collapse" href="tabs_panels.html#collapseOne2">在线列表</a>
+                            </h5>
+                        </div>
+                        <div aria-expanded="true" class="panel-collapse collapse in" id="collapseOne2" style="">
+                            <div class="panel-body">
+
+                                <div class="jqGrid_wrapper">
+                                    <table id="devNetList"></table>
+                                    <div id="devicePager"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+<script src="js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+<script src="js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/content.min.js?v=1.0.0"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/plugins/toastr/toastr.min.js"></script>
+
+<script>
+
+
+
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://47.112.107.93:8080/accwater/ws");
+    } else {
+        warningMsg("当前浏览器不支持webSocket");
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function() {
+
+        errorMsg("连接失败！");
+
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function() {
+
+
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function() {
+
+        warningMsg("连接断开!")
+
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function() {
+        closeWebSocket();
+    }
+    //关闭WebSocket连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+    //将消息显示在网页上
+    function setMessageInnerTEXT(TEXT) {
+
+        var tmp = $("#recMsg").val();
+
+        document.getElementById('recMsg').innerText = tmp + TEXT
+            + "-----------------" + DateFormat(new Date()) + "\n";
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function(event) {
+
+        var deviceId = $.trim($("#deviceId").val());
+        var msg = event.data;
+
+        //console.log(msg);
+
+        var id = msg.substring(16,32).trim();
+
+        if (deviceId == id) {
+            setMessageInnerTEXT(msg.substring(32,msg.length));
+        }
+    }
+
+
+    function clearsend() {
+        document.getElementById('sendMsg').innerText = "";
+    }
+
+    function clearrec() {
+        document.getElementById('recMsg').innerText = "";
+    }
+
+
+
+
+
+    function showP() {
+
+        var str="1、数据召测<br>\n" +
+            "   发送：(m)<br>\n" +
+            "   返回:(p_RTU_水位值_水位计状态_是否报警_报警器1状态_报警器2状态_报警器3状态_报警器4状态)<br>\n" +
+            "\t\n" +
+            "   水位计状态：正常1 异常0<br>\n" +
+            "   是否报警：报警1 未报警0<br>\n" +
+            "   报警状态值：正常1 异常0 禁用2<br>\n" +
+            "\n" +
+            "2、报警器控制<br>\n" +
+            "   发送(w_打开/关闭)_声音类型_音量值)<br>\n" +
+            "   打开1<br>\n" +
+            "   关闭0<br>\n" +
+            "   声音类型：0~29<br>\n" +
+            "   音量大小:0~15<br>\n" +
+            "\n" +
+            "3、起禁用报警器<br>\n" +
+            "   发送：（i_1111）<br>\n" +
+            "   启用1  禁用0 分别表示1~4路报警器<br>\n" +
+            "\n" +
+            "4、本地报警策略<br>\n" +
+            "   发送：（g_离线报警使能_报警水位阈值_气泵使能）<br>\n" +
+            "   开启1  关闭0<br>\n" +
+            "\n"
+
+
+
+        var looptran = layer.msg(str, {
+             time: 10000, //10s后自动关闭
+
+            width: '500px',
+             btn: ['确定']
+        });
+        layer.style(looptran, {
+            width: '500px',
+            height:'200px'
+        });
+
+
+    }
+
+    function sendMsg(){
+
+        var serviceId = "accWater";
+        var deviceId = $.trim($("#deviceId").val());
+
+        if (deviceId.length<1){
+
+            warningMsg("输入设备ID");
+            return;
+        }
+
+        var cmdPar = $.trim($("#cmdPar").val());
+        if (deviceId.length<1){
+
+            warningMsg("输入正确的参数");
+            return;
+        }
+
+        var spase_serviceId = "";
+        var spase_deviceId = "";
+
+        for (var i = 0; i < (16 - serviceId.length); i++) {
+            spase_serviceId = spase_serviceId + " ";
+        }
+
+        for (var i = 0; i < (16 - deviceId.length); i++) {
+            spase_deviceId = spase_deviceId + " ";
+        }
+
+        if (cmdPar.length > 0) {
+            var tmp = $("#sendMsg").val();
+
+            document.getElementById('sendMsg').innerText = tmp + cmdPar
+                + "-----------------" + DateFormat(new Date()) + "\n";
+
+            cmdPar = serviceId + spase_serviceId + deviceId + spase_deviceId + cmdPar;
+
+            websocket.send(cmdPar);
+
+        }
+
+        console.log(cmdPar);
+
+    }
+
+
+
+    function closeDev(deviceId){
+        var data = GetData("../data.api/disconnect",{"serviceId":"accWater","deviceId":deviceId});
+        if (data.statusCode == 200){
+            successMsg("执行成功");
+        } else {
+            errorMsg(data.reason);
+        }
+
+    }
+
+
+
+    $(function () {
+
+        $.jgrid.defaults.styleUI = "Bootstrap";
+
+        $("#devNetList")
+            .jqGrid(
+                {
+                    url: "../getSessionsProperty?serviceId=accWater",
+                    datatype: "json",
+                    // postData: {"params2":0},
+                    mtype: 'POST',
+                    height: 450,
+                    autowidth: true,
+                    shrinkToFit: true,
+                    rowNum: 10,
+                    loadonce: true,
+                    rowList: [10, 20, 30],
+                    colNames: ["设备ID", "设备地址", "注册时间",
+                        "活动时间","操作"],
+                    colModel: [
+                        {
+                            name: "regId",
+                            index: "regId",
+                            width: 20,
+                            sortable: false,
+                        },
+                        {
+                            name: "address",
+                            index: "address",
+                            editable: true,
+                            width: 30,
+                            sortable: false
+
+                        },
+                        {
+                            name: "registerTime",
+                            index: "registerTime",
+                            width: 50,
+                            sortable: false,
+                            search: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+                                return DateFormat(cellValue);
+                            }
+
+                        },
+                        {
+                            name: "activityTime",
+                            index: "activityTime",
+                            width: 20,
+                            sortable: false,
+                            search: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+                                return DateFormat(cellValue);
+                            }
+
+                        },
+                        {
+                            name: "regId",
+                            index: "regId",
+                            width: 20,
+                            sortable: false,
+                            search: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                var   html = "<a onclick='closeDev(\""+cellValue+"\")'>断开连接</a>"
+
+                                return  html;
+                            }
+
+                        }],
+                    pager: "#devicePager",
+                    viewrecords: true,
+                    /* 	caption : "jqGrid 示例2", */
+                    // add: true,
+                    // edit: true,
+                    // addtext: "Add",
+                    // edittext: "Edit",
+                    hidegrid: false,
+                    ondblClickRow:function(row){
+                        console.log(row);
+                        var rowData = $('#devNetList').jqGrid('getRowData',row);
+                        $("#deviceId").val(rowData.regId);
+                    },
+
+                });
+
+
+        var token = GetData("../getToken",null);
+        var cmds = null;
+
+        if (token == "admin"){
+
+            cmds = {
+                'value': [{
+                    'id': '0',
+                    'cmdType': '查询水位'
+                }, {
+                    'id': '1',
+                    'cmdType': '打开/关闭报警器'
+                }, {
+                    'id': '2',
+                    'cmdType': '起禁用报警器'
+                },
+                    {
+                        'id': '3',
+                        'cmdType': '本地报警策略'
+                    },
+                    {
+                        'id': '4',
+                        'cmdType': '设置心跳间隔'
+                    },
+                    {
+                        'id': '5',
+                        'cmdType': '修改设备ID'
+                    },
+                    {
+                        'id': '6',
+                        'cmdType': '修改水位加报阈值'
+                    }
+
+
+
+                ]
+            };
+        } else {
+
+
+            cmds = {
+                'value': [{
+                    'id': '0',
+                    'cmdType': '查询水位'
+                }, {
+                    'id': '1',
+                    'cmdType': '打开/关闭报警器'
+                }
+                ]
+            };
+
+
+            $("#pro").remove();
+
+        }
+
+
+
+
+        $("#cmdType").bsSuggest({
+            effectiveFields: ["cmdType"],
+            keyField: "cmdType",
+            data:cmds
+        }).on(
+            'onSetSelectValue',
+            function (e, keyword) {
+                console.log('onSetSelectValue: ', keyword);
+
+                if (keyword.id == 0) {
+
+                    $("#cmdPar").val("(m)");
+                } else if (keyword.id == 1) {
+
+                    $("#cmdPar").val("(w_1_2_N)");
+
+                } else if (keyword.id == 2) {
+
+                    $("#cmdPar").val("(i_1111)");
+
+                } else if (keyword.id == 3) {
+
+                    $("#cmdPar").val("(g_1_30_1)");
+
+                }else if (keyword.id == 4) {
+
+                    $("#cmdPar").val("(t_02)");
+
+                }else if (keyword.id == 5) {
+
+                    $("#cmdPar").val("(d)");
+
+                }else if (keyword.id == 6) {
+
+                    $("#cmdPar").val("(h_05)");
+
+                }
+
+            });
+
+
+    });
+
+
+    $(window).bind("resize", function () {
+        var width = $(".jqGrid_wrapper").width();
+        $("#devNetList").setGridWidth(width)
+    });
+
+
+
+
+
+
+
+</script>
+
+<script charset="UTF-8"
+        src="http://tajs.qq.com/stats?sId=9051096" type="text/javascript"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_jqgrid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>

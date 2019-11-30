@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_jqgrid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+    <title>H+ 后台主题UI框架 - jqGird</title>
+    <meta content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台" name="keywords">
+    <meta content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术"
+          name="description">
+
+    <link href="favicon.ico" rel="shortcut icon">
+    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+    <style>
+        /* Additional style to fix warning dialog position */
+        #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+
+                <div class="ibox-content">
+
+                   <!-- <div class="row">
+                        <div class="col-sm-3">
+                            <div class="widget style1 lazur-bg">
+                                <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-rss fa-3x"></i>
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+                                        <h3 class="font-bold" id="dev_count">总数：-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-3">
+                            <div class="widget style1 navy-bg">
+                                <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-rss fa-3x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <h3 class="font-bold" id="dev_online">在线数：-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-3">
+                            <div class="widget style1 yellow-bg">
+                                <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-rss fa-3x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <h3 class="font-bold" id="dev_notOnline">离线数：-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="widget style1 lazur-bg">
+                                <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-rss fa-3x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <h3 class="font-bold" id="dev_zxl">在线率：-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+
+
+                    <div class="row">
+
+                   <!--     <div class="col-lg-2">
+                            <div class="input-group">
+                                <input class="form-control" id="cityId" placeholder="城市"
+                                       type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-white dropdown-toggle" data-toggle="dropdown"
+                                            type="button">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>-->
+
+
+              <!--          <div class="col-lg-2">
+                            <div class="input-group">
+                                <input class="form-control" id="areaId" placeholder="区县"
+                                       type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-white dropdown-toggle" data-toggle="dropdown"
+                                            type="button">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>-->
+
+
+                        <div class="col-lg-3">
+                            <input  class="form-control" id="site_code"
+                                   placeholder="设备ID" type="text">
+                        </div>
+
+
+
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <input class="form-control" id="online" placeholder="选择通信状态"
+                                       type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-white dropdown-toggle" data-toggle="dropdown"
+                                            type="button">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <button class="btn btn-primary " onclick="findData()"
+                                        type="button">
+                                    <i class="fa fa-search"></i> <span class="bold">搜索</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <div class="jqGrid_wrapper">
+                        <table id="deviceStatusList"></table>
+                        <div id="devicePager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+<script src="js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+<script src="js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/content.min.js?v=1.0.0"></script>
+<script>
+
+    var  netStatus;
+
+
+
+
+    function findData() {
+
+        var site_code = $("#site_code").val().trim();
+
+
+        var dev = new Object();
+
+        var par = "";
+
+        if (site_code.length > 0) par = par + "site_code=" + site_code + "&";
+        if (netStatus != null) par = par + "netStatus=" + netStatus + "&";
+
+
+        $('#deviceStatusList').jqGrid('clearGridData');
+
+        $('#deviceStatusList').jqGrid(
+            'setGridParam',
+            {
+                datatype: 'json',
+                // mtype: 'post',
+                url: "../getRealTimeData?" + par,
+
+            }).trigger('reloadGrid');
+
+
+    }
+
+
+    function getStatistics() {
+        var dataList;
+        var data = GetData("../getDeviceRealTimeData?getStatistics", null);
+
+
+        if (data != null) {
+
+            var dev_count = data.length;
+            var dev_online = 0;
+            var dev_notOnline = 0;
+            var dev_zxl = 0;
+
+
+
+            for (var i = 0; i < dev_count; i++) {
+                if (!checkTM(data[i].cyDate)) {
+                    dev_notOnline = dev_notOnline + 1;
+                }
+            }
+
+            dev_online =  dev_count-dev_notOnline;
+
+            document.getElementById("dev_count").innerHTML = "总数:"+dev_count;
+            document.getElementById("dev_online").innerHTML = "在线数:"+(dev_online);
+            document.getElementById("dev_notOnline").innerHTML = "离线数:"+dev_notOnline;
+            document.getElementById("dev_zxl").innerHTML = "在线率:"+((100 * dev_online) / dev_count )+"%";
+
+
+
+
+        }
+    }
+
+
+    $(function () {
+
+        $.jgrid.defaults.styleUI = "Bootstrap";
+
+        $("#deviceStatusList")
+            .jqGrid(
+                {
+                    url: "../getRealTimeData",
+                    datatype: "json",
+                    // postData: {"params2":0},
+                    mtype: 'POST',
+                    height: 450,
+                    autowidth: true,
+                    shrinkToFit: true,
+                    rowNum: 10,
+                    loadonce: true,
+                    rowList: [10, 20, 30],
+                    colNames: ["通信状态", "设备ID", "设备名称", "水位值(cm)",
+                        "预警状态", "水位计状态", "1路","2路","3路","4路","上报日期"],
+                    colModel: [
+                        {
+                            name: "created",
+                            index: "created",
+                            width: 20,
+                            sortable: false,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                var onlineflag = checkTM(cellValue);
+                                var online;
+                                if (onlineflag) {
+                                    online = "<img src=\"images/zx.gif\"   title=\"通信正常\"/>";
+                                } else {
+                                    online = "<img src=\"images/lx.gif\"   title=\"通信异常\" />";
+                                }
+
+                                return online;
+                            }
+
+                        },
+                        {
+                            name: "site_code",
+                            index: "site_code",
+                            editable: true,
+                            width: 30,
+                            sortable: true
+
+                        },
+                        {
+                            name: "name",
+                            index: "name",
+                            width: 50,
+                            sortable: true
+
+                        },
+                        {
+                            name: "water_value",
+                            index: "water_value",
+                            width: 20,
+                            sortable: true
+
+
+                        },
+                        {
+                            name: "siren_status",
+                            index: "siren_status",
+                            width: 20,
+                            sortable: false,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                if (cellValue == 1){
+
+                                    return "打开"
+                                }
+                                return "关闭";
+                            }
+
+                        },
+                        {
+                            name: "water_sensor_status",
+                            index: "water_sensor_status",
+                            width: 20,
+                            sortable: true,
+                            search: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                if (cellValue == 1){
+
+                                    return "正常"
+                                }
+
+                                return "异常";
+                            }
+                        },
+                        {
+                            name: "siren1_sensor_status",
+                            index: "siren1_sensor_status",
+                            width: 20,
+                            sortable: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                if (cellValue == 1){
+
+                                    return "正常"
+                                }
+                                if (cellValue == 0){
+
+                                    return "异常"
+                                }
+                                if (cellValue == 2){
+
+                                    return "禁用"
+                                }
+
+                                return "异常";
+                            }
+
+                        },
+                        {
+                            name: "siren2_sensor_status",
+                            index: "siren2_sensor_status",
+                            width: 20,
+                            sortable: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                if (cellValue == 1){
+
+                                    return "正常"
+                                }
+                                if (cellValue == 0){
+
+                                    return "异常"
+                                }
+                                if (cellValue == 2){
+
+                                    return "禁用"
+                                }
+
+                                return "异常";
+                            }
+
+
+
+                        },
+                        {
+                            name: "siren3_sensor_status",
+                            index: "siren3_sensor_status",
+                            width: 20,
+                            sortable: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                if (cellValue == 1){
+
+                                    return "正常"
+                                }
+                                if (cellValue == 0){
+
+                                    return "异常"
+                                }
+                                if (cellValue == 2){
+
+                                    return "禁用"
+                                }
+
+                                return "异常";
+                            }
+
+
+
+                        },{
+                            name: "siren4_sensor_status",
+                            index: "siren4_sensor_status",
+                            width: 20,
+                            sortable: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+
+                                if (cellValue == 1){
+
+                                    return "正常"
+                                }
+                                if (cellValue == 0){
+
+                                    return "异常"
+                                }
+                                if (cellValue == 2){
+
+                                    return "禁用"
+                                }
+
+                                return "异常";
+                            }
+
+
+
+                        },{
+                            name: "created",
+                            index: "created",
+                            width: 40,
+                            sortable: true,
+                            formatter: function (cellValue,
+                                                 options, rowObject) {
+                                return DateFormat(cellValue);
+                            }
+
+                        }],
+                    pager: "#devicePager",
+                    viewrecords: true,
+                    hidegrid: false,
+
+                });
+
+
+        $("#deviceStatusList").jqGrid('setGroupHeaders', {
+            useColSpanStyle: true,
+            groupHeaders: [
+                {startColumnName: 'siren1_sensor_status', numberOfColumns: 4, titleText: '报警器状态'},
+
+
+            ]
+        });
+
+
+
+
+
+        $("#online").bsSuggest({
+            effectiveFields: ["onlineStatus"],
+            keyField: "onlineStatus",
+            data: {
+                'value': [{
+                    'id': '0',
+                    'onlineStatus': '全部'
+                }, {
+                    'id': '1',
+                    'onlineStatus': '在线'
+                }, {
+                    'id': '2',
+                    'onlineStatus': '离线'
+                }
+
+                ]
+            }
+        }).on(
+            'onSetSelectValue',
+            function (e, keyword) {
+                console.log('onSetSelectValue: ', keyword);
+
+               if  (keyword.id !="0"){
+                   netStatus = keyword.id;
+               } else netStatus = null;
+
+            });
+
+
+
+
+
+    });
+
+
+    $(window).bind("resize", function () {
+        var width = $(".jqGrid_wrapper").width();
+        $("#deviceStatusList").setGridWidth(width)
+    });
+
+
+</script>
+
+<script charset="UTF-8"
+        src="http://tajs.qq.com/stats?sId=9051096" type="text/javascript"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_jqgrid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>
